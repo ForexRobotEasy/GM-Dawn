@@ -1,0 +1,85 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                         GM Dawn Forex Software  |
+//|                                              forexroboteasy.com |
+//|                                       Developed by Forex Robot Easy Team |
+//+------------------------------------------------------------------+
+
+// Define the promotional price
+#define PROMOTIONAL_PRICE 250
+
+// Define the maximum number of copies for promotional price
+#define MAX_PROMOTIONAL_COPIES 10
+
+//+------------------------------------------------------------------+
+//|                                        GM Dawn Forex Software   |
+//|                                          Initialization Function |
+//+------------------------------------------------------------------+
+void OnInit()
+{
+   // Check if promotional price limit has been reached
+   if (CopiesTotal() >= MAX_PROMOTIONAL_COPIES)
+   {
+      // Display an error message and terminate the program
+      Print('Promotional price limit has been reached. Please purchase at forexroboteasy.com.');
+      ExpertRemove();
+   }
+   else
+   {
+      // Display a welcome message with promotional price
+      Print('Welcome to GM Dawn Forex Software! For a limited time, enjoy our promotional price of $', PROMOTIONAL_PRICE, ' with a complimentary EA.');
+   }
+}
+
+//+------------------------------------------------------------------+
+//|                                       GM Dawn Forex Software     |
+//|                                            Main Trading Function |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+   // Place your trading logic here
+   // Example:
+   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+   double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+   
+   if (bid > ask)
+   {
+      // Buy logic
+      Print('Buy');
+   }
+   else if (bid < ask)
+   {
+      // Sell logic
+      Print('Sell');
+   }
+   else
+   {
+      // Do nothing
+      Print('Hold');
+   }
+}
+
+//+------------------------------------------------------------------+
+//|                                        GM Dawn Forex Software    |
+//|                                                 Deinitialization |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+   // Add any necessary deinitialization code here
+   Print('GM Dawn Forex Software has been deinitialized.');
+}
+
+//+------------------------------------------------------------------+
+//|                                       GM Dawn Forex Software     |
+//|                                            Helper Functions     |
+//+------------------------------------------------------------------+
+int CopiesTotal()
+{
+   // Get the total number of copies sold
+   int totalCopies = 0;
+   // Add your code to check the number of copies sold
+   // Example:
+   totalCopies = 5;  // Assume 5 copies have been sold
+   
+   return totalCopies;
+}
